@@ -40,61 +40,31 @@ public class NPCs extends JavaPlugin{
         EntityPlayer npc = new EntityPlayer(server, world, profile, manager);
         npc.playerConnection = new PlayerConnection(server, new NetworkManager(EnumProtocolDirection.CLIENTBOUND), npc);
         npc.setLocation(0,65,0,0,0);
-        world.addEntity(npc, SpawnReason.NATURAL);
         
         for(Player p : Bukkit.getOnlinePlayers()){
         	
         	PacketPlayOutPlayerInfo packet1 = new PacketPlayOutPlayerInfo(EnumPlayerInfoAction.ADD_PLAYER, npc);
         	
-//			try{
-//
-//				Field f = packet1.getClass().getDeclaredField("b");
-//				f.setAccessible(true);
-//				List<PlayerInfoData>  profileList = (List<PlayerInfoData>) f.get(packet1);
-//				
-//				for(PlayerInfoData gameProfile : profileList){
-//					
-//					System.out.println(gameProfile.a().toString());
-//					
-//				}
-//				
-//				f.setAccessible(false);
-//				
-//			}catch (Exception e) {
-//				e.printStackTrace();
-//			}
-    			
-    		
-        	
-//        	((CraftPlayer) p).getHandle().playerConnection.sendPacket(packet1);
-       
         	PacketPlayOutNamedEntitySpawn packet = new PacketPlayOutNamedEntitySpawn(npc);
         	
         	try {
 
         		Field f = packet.getClass().getDeclaredField("b");
         		f.setAccessible(true);
-        		f.set(packet, uuid.fromString("452e82d8-c423-4e6c-bb90-6c7121e2677e"));
+        		f.set(packet, uuid.fromString("069a79f4-44e9-4726-a5be-fca90e38aaf5"));
         		f.setAccessible(false);
 
-//            	for(Field f1 : packet.getClass().getDeclaredFields()){
-//            		
-//            		f1.setAccessible(true);
-//            		System.out.println(f1.getName() + " --- " + f1.get(packet));
-//            		f1.setAccessible(false);
-//            		
-//            	}
-
-        		
         		
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
         	
+        	((CraftPlayer) p).getHandle().playerConnection.sendPacket(packet1);
         	((CraftPlayer) p).getHandle().playerConnection.sendPacket(packet);
         	
         }
         
+        world.addEntity(npc, SpawnReason.NATURAL);
 		
 	}
 	
