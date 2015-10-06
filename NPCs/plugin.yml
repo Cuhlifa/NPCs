@@ -1,0 +1,5 @@
+ name: NPCs
+ version: 1.4.1
+ description: Nirvanna NPCs
+ author: Connor
+ main: com.connor.npcs.NPCs
